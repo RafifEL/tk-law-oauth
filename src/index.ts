@@ -25,7 +25,7 @@ async function main() {
   app.use(AuthRouter);
 
   app.listen(3020, () => {
-    console.log('App start at port 3000');
+    console.log('App start at port 3020');
   });
 }
 
