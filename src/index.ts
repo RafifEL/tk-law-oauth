@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { config } from 'dotenv';
 import Redis from './utils/redis';
 import AuthRouter from './routes';
+import cors from 'cors';
 config();
 
 async function main() {
@@ -19,6 +20,12 @@ async function main() {
   app.use(
     express.urlencoded({
       extended: true,
+    })
+  );
+
+  app.use(
+    cors({
+      origin: '*',
     })
   );
 
