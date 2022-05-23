@@ -109,6 +109,7 @@ AuthRouter.post('/login', async (req: LoginReq, res: Response) => {
       access_token: accessToken,
       expires_in: 8 * 3600,
       token_type: 'Bearer',
+      user: dataSigned,
     });
   } catch (err) {
     console.log(err);
