@@ -4,6 +4,9 @@ import { config } from 'dotenv';
 import Redis from './utils/redis';
 import AuthRouter from './routes';
 import cors from 'cors';
+import { Server, ServerCredentials } from 'grpc';
+import AuthTokenServer from './protoService';
+import { AuthTokenService } from './proto/auth_grpc_pb';
 config();
 
 async function main() {
@@ -30,10 +33,17 @@ async function main() {
   );
 
   app.use(AuthRouter);
-
   app.listen(3020, () => {
     console.log('App start at port 3020');
   });
+
+  const server = new Server();
+  server.addService(AuthTokenService, new AuthTokenServer());
+  const port = 3021;
+  const uri = `localhost:${port}`;
+  console.log(`GRPC Listening on ${uri}`);
+  server.bind(uri, ServerCredentials.createInsecure());
+  server.start();
 }
 
 main();

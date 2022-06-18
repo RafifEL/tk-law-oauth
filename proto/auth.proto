@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package authToken;
+
+message TokenResource {
+  string username = 1;
+  string nama = 2;
+  string alamat = 3;
+}
+
+message Token {
+  string token = 1;
+}
+
+service AuthToken {
+  rpc GetTokenResource(Token) returns (TokenResource) {};
+}

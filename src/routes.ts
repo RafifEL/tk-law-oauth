@@ -3,6 +3,9 @@ import { User } from './models/user';
 import Jwt from 'jsonwebtoken';
 import { env } from 'process';
 import Redis from './utils/redis';
+import AuthClient from './protoClient';
+import { ServiceError } from 'grpc';
+import { Token, TokenResource } from './proto/auth_pb';
 
 interface LoginReq extends Request {
   body: {
